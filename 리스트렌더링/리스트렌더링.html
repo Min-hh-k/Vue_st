@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="handler">click</button>
+
+    <ul>
+      <li v-for="fruit in newFruits" :key="fruit.id">
+        {{ fruit.name}}-{{ fruit.id }}
+      </li>
+    </ul>
+  </div>
+
+  <script>
+
+    new Vue ({
+      el: '#app',
+      data() {
+        return {
+          fruits: ['apple','banana','cherry'],
+          // newFruits: [
+          //   {id: 0, name: 'apple'},
+          //   {id: 1, name: 'banana'},
+          //   {id: 2, name: 'cherry'},
+          // ]
+        }
+      },
+      computed: {
+        newFruits() {
+          return this.fruits.map((fruit, index) => {
+            return{
+              id: index,
+              name: fruit
+            }
+          })
+        },
+
+      },
+      methods: {
+        handler () {
+          this.fruits.push('orange')
+        }
+      },
+    })
+  </script>
+</body>
+</html>
