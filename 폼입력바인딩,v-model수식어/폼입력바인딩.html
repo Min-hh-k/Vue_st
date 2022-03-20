@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+  <div id="app">
+    <h1>{{ msg }}</h1>
+    <p>@input="handler"</p>
+    <input type="text" :value="msg" @input="handler">
+    <p>@input</p>
+    <input type="text" :value="msg" @input="msg = $event.target.value">
+    <p>@change</p>
+    <input type="text" :value="msg" @change="msg = $event.target.value">
+    <p>@change == v-model.lazy</p>
+    <input type="text" :value="msg" v-model.lazy="msg">
+    <p>v-model="msg"</p>
+    <input type="text" v-model="msg">
+    <p>v-model.number="msg" 숫자값이 양방향 데이터로 이동 시  string 으로 바뀌기 때문에<br>
+      v-model.number로 숫자로바꿔줌</p>
+    <input type="text" v-model.number="number">
+    <h3>{{ number }}</h3>
+    <p>.trim 사용시 앞뒤 공백 없애고 출력</p>
+    <input type="text" v-model.trim="number">
+ 
+    <br>
+    <h1>{{ checked }}</h1>
+    <input type="checkbox" v-model="chekced">
+
+  </div>  
+
+
+  <script>
+
+    new Vue ({
+      el: '#app',
+      data: {
+          msg: 'hello world',
+          number: 123,
+          checked: false,
+      },
+      methods: {
+        handler() { // 양방향 데이터 바인딩
+          console.log(event.target.value)
+          this.msg = event.target.value
+        }
+      },
+      watch: {
+        number() {
+          console.log(typeof this.number)
+        },
+        msg() {
+          console.log(this.msg)
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
