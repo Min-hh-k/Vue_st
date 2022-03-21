@@ -6,10 +6,16 @@
 	>
 		<slot></slot>
 	</div>
+	<h1 :class="$attrs.class" :style="$attrs.style"></h1>
+	<h1 v-bind="$attrs"></h1>
 </template>
 
 <script>
 export default {
+	inheritAttrs: false,
+	created() {
+		console.log(this.$attrs);
+	},
 	props: {
 		color: {
 			type: String,
